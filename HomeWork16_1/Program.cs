@@ -27,7 +27,7 @@ namespace HomeWork16_1
                 try
                 {
                     Console.WriteLine("Введите количество позиций товаров, которые хотите ввести в массив:");
-                    productCount = Int32.Parse(Console.ReadLine());
+                    productCount = Int32.Parse(Console.ReadLine());                    
                 }
                 catch (Exception ex)
                 {
@@ -39,6 +39,7 @@ namespace HomeWork16_1
             {
                 Console.WriteLine($"Товар №{i + 1}:");
                 productArray[i] = new Product();
+                Console.Clear();
             }
             JsonSerializerOptions options = new JsonSerializerOptions()
             {
@@ -50,7 +51,7 @@ namespace HomeWork16_1
             {
                 Directory.CreateDirectory(path);
             }
-            else if (Directory.Exists(path) && !File.Exists(path + fileName))
+            if (Directory.Exists(path) && !File.Exists(path + fileName))
             {
                 File.Create(path + fileName).Close();
             }

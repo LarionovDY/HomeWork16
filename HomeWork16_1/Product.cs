@@ -31,7 +31,7 @@ namespace HomeWork16_1
             Price = ReadDecValue("Введите цену с НДС");
             this.vat = ReadDecValue("Введите ставку НДС в процентах");
             PriceWVat = Math.Round(Price / (1 + this.vat / 100), 2);
-        }
+        }        
         protected int ReadIntValue(string text)   //метод проверяющий корректность ввода данных
         {
             int value;

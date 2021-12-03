@@ -20,9 +20,11 @@ namespace HomeWork16_2
             string path = "MyFiles";
             string fileName = "/File.json";
             string jsonString;
+
+            HomeWork16_1.Product[] productArray = new HomeWork16_1.Product[5];
             using (StreamReader myFileRead = new StreamReader(path + fileName))
             {
-                jsonString = myFileRead.ReadToEnd();                
+                jsonString = myFileRead.ReadToEnd();
             }
             HomeWork16_1.Product[] person = JsonSerializer.Deserialize<HomeWork16_1.Product[]>(jsonString);
             foreach (var item in person)
@@ -32,4 +34,31 @@ namespace HomeWork16_2
             Console.ReadKey();
         }
     }
+    class DeserializedJson 
+    {
+        [JsonPropertyName("название")]
+        public string Name { get; set; }
+        [JsonPropertyName("артикул")]
+        public int Article { get; set; }
+        [JsonPropertyName("цена с НДС")]
+        public decimal Price { get; set; }
+        [JsonIgnore]
+        readonly decimal vat;
+        [JsonPropertyName("цена без НДС")]
+        public decimal PriceWVat { get; set; }
+        protected internal Product()
+        {
+            HomeWork16_1.Product[] person = JsonSerializer.Deserialize<HomeWork16_1.Product[]>(jsonString);
+            Name = Console.ReadLine();
+            Article = ReadIntValue("Введите артикул товара:");
+            Price = ReadDecValue("Введите цену с НДС");
+            this.vat = ReadDecValue("Введите ставку НДС в процентах");
+            PriceWVat = Math.Round(Price / (1 + this.vat / 100), 2);
+        }
+
+
+
+
+    }
+       
 }
