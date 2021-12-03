@@ -22,7 +22,7 @@ namespace HomeWork16_1
         [JsonIgnore]
         readonly decimal vat;
         [JsonPropertyName("цена без НДС")]
-        public decimal PriceWVat { get; set; }
+        public decimal PriceWVat { get; set; }        
         protected internal Product()
         {
             Console.WriteLine("Введите название товара:");
