@@ -20,32 +20,30 @@ namespace HomeWork16_2
             string path = "MyFiles";
             string fileName = "/File.json";
             string jsonString;
-            
             using (StreamReader myFileRead = new StreamReader(path + fileName))
             {
                 jsonString = myFileRead.ReadToEnd();
             }
-            ProductDesrialize[] productArray = JsonSerializer.Deserialize<ProductDesrialize[]>(jsonString);
+            ProductDesrialized[] productArray = JsonSerializer.Deserialize<ProductDesrialized[]>(jsonString);
+            ProductDesrialized max = productArray[0];
+            for (int i = 0; i < productArray.Length; i++)
+            {
+                if (max.Price < productArray[i].Price)
+                {
+                    max = productArray[i];
+                }
+            }
+            Console.WriteLine($"Cамый дорогой товар(ы) в списке:\n{max.Name}");
             foreach (var item in productArray)
             {
-                Console.WriteLine(item.PriceWVat);
+                if (max.Price == item.Price && max.Name != item.Name)
+                {
+                    Console.WriteLine(item.Name);
+                }
             }
+            Console.WriteLine($"С ценой {max.Price} рублей");
             Console.ReadKey();
         }
-
     }
-    public class ProductDesrialize
-    {
-        [JsonPropertyName("название")]
-        public string Name { get; set; }
-        [JsonPropertyName("артикул")]
-        public int Article { get; set; }
-        [JsonPropertyName("цена с НДС")]
-        public decimal Price { get; set; }
-        [JsonIgnore]
-        readonly decimal vat;
-        [JsonPropertyName("цена без НДС")]
-        public decimal PriceWVat { get; set; }        
-    }
-
+    
 }

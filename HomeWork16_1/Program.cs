@@ -34,7 +34,7 @@ namespace HomeWork16_1
                     Console.WriteLine(ex.Message);
                 }
             }
-            Product[] productArray = new Product[productCount];
+            Product[] productArray = new Product[productCount];            
             for (int i = 0; i < productCount; i++)
             {
                 Console.WriteLine($"Товар №{i + 1}:");

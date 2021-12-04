@@ -11,7 +11,7 @@ using System.IO;
 
 namespace HomeWork16_1
 {
-    public class Product
+    class Product
     {
         [JsonPropertyName("название")]
         public string Name { get; set; }
@@ -20,19 +20,22 @@ namespace HomeWork16_1
         [JsonPropertyName("цена с НДС")]
         public decimal Price { get; set; }
         [JsonIgnore]
-        readonly decimal vat;
+        static readonly decimal vat;
         [JsonPropertyName("цена без НДС")]
-        public decimal PriceWVat { get; set; }        
+        public decimal PriceWVat { get; set; }
+        static Product() 
+        {
+            vat = ReadDecValue("Введите ставку НДС в процентах");
+        }
         protected internal Product()
         {
             Console.WriteLine("Введите название товара:");
             Name = Console.ReadLine();
             Article = ReadIntValue("Введите артикул товара:");
-            Price = ReadDecValue("Введите цену с НДС");
-            this.vat = ReadDecValue("Введите ставку НДС в процентах");
-            PriceWVat = Math.Round(Price / (1 + this.vat / 100), 2);
+            Price = ReadDecValue("Введите цену с НДС");            
+            PriceWVat = Math.Round(Price / (1 + vat / 100), 2);
         }        
-        protected int ReadIntValue(string text)   //метод проверяющий корректность ввода данных
+        protected static int ReadIntValue(string text)   //метод проверяющий корректность ввода данных
         {
             int value;
             while (true)
@@ -48,7 +51,7 @@ namespace HomeWork16_1
                 }
             }
         }
-        protected decimal ReadDecValue(string text)   //метод проверяющий корректность ввода данных
+        protected static decimal ReadDecValue(string text)   //метод проверяющий корректность ввода данных
         {
             decimal value;
             while (true)
